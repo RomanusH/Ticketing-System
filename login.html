@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Support Ticket System</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="navbar.css"> <!-- Include the navbar styles -->
+    <script src="https://unpkg.com/feather-icons"></script> <!-- Include Feather Icons -->
+</head>
+<body>
+    <div class="header">  
+        <div class="header__logo">
+            <strong>LOGO</strong>
+        </div>
+        <nav class="navbar">
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="main.html" class="navbar__link"><i data-feather="home"></i><span>Ana Sayfa</span> </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <main>
+        <div class="container">
+            <div id="login-form">
+                <h2>Giriş Yap</h2>
+                <form id="loginForm" action="login.php" method="post">
+                    <label for="role">Rol</label>
+                    <select id="role" name="role" required>
+                        <option value="customer">Müşteri</option>
+                        <option value="customerManager">Müşteri Yöneticisi</option>
+                    </select>
+
+                    <label for="Email">Email</label>
+                    <input type="email" id="Email" name="Email" required>
+
+                    <label for="LoginPasscode">Parola</label>
+                    <input type="password" id="LoginPasscode" name="LoginPasscode" required>
+
+                    <button type="submit">Giriş Yap</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Support Ticket System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
