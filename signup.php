@@ -4,10 +4,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$servername = "localhost"; // or your server name
-$username = "root"; // your username
-$password = ""; // your password
-$dbname = "Ticketing_system"; // your database name
+$servername = "?"; // or your server name
+$username = "?"; // your username
+$password = "?"; // your password
+$dbname = "?"; // your database name
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
