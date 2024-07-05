@@ -45,7 +45,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "All fields are required.";
         }
     } elseif ($role === 'customer') {
-        $CustomerID = isset($_POST['CustomerID']) ? $_POST['CustomerID'] : null;
+        // Generate CustomerID
+        $sql = "SELECT MAX(CustomerID) AS max_id FROM Customers";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $max_id = $row['max_id'];
+        
+        if ($max_id) {
+            $max_id_num = (int)str_replace('CST-', '', $max_id);
+            $new_id_num = $max_id_num + 1;
+        } else {
+            $new_id_num = 1;
+        }
+
+        $CustomerID = 'CST-' . str_pad($new_id_num, 3, '0', STR_PAD_LEFT);
 
         if ($CustomerID && $Name && $Surname && $Gender && $Email && $Telephone && $LoginPasscode) {
             $sql = "INSERT INTO Customers (CustomerID, Name, Surname, Gender, Email, Telephone, LoginPasscode) 
