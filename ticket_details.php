@@ -43,21 +43,32 @@ $isClosed = $ticket['Status'] == 0; // Assuming 0 means closed
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticket Details - Support Ticket System</title>
     <link rel="stylesheet" href="ticket_details.css">
+    <link rel="stylesheet" href="navbar.css">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>Support Ticket System</h1>
-            <nav>
-                <ul>
-                    <li><a href="ticketing.php">Ticket Gönder</a></li>
-                    <li><a href="list_tickets.php">Ticketleri Gör</a></li>
-                    <li><a href="logout.php">Çıkış Yap</a></li>
-                </ul>
-            </nav>
+    <div class="header">  
+        <div class="header__logo">
+            <strong>LOGO</strong>
         </div>
-    </header>
-
+        <nav class="navbar">
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="ticketing.php" class="navbar__link"><i data-feather="home"></i><span>Ana Sayfa</span></a>
+                </li>
+                <li class="navbar__item">
+                    <a href="list_tickets.php" class="navbar__link"><i data-feather="message-square"></i><span>Ticketleri Gör</span></a>        
+                </li>
+                <li class="navbar__item">
+                    <a href="account.php" class="navbar__link"><i data-feather="user"></i><span>Hesabım</span></a>  
+                </li>
+                <li class="navbar__item">
+                    <a href="logout.php" class="navbar__link"><i data-feather="settings"></i><span>Çıkış</span></a>        
+                </li>
+            </ul>
+        </nav>
+    </div>
     <main>
         <div class="container">
             <h2>Ticket Detayları</h2>
@@ -114,7 +125,9 @@ $isClosed = $ticket['Status'] == 0; // Assuming 0 means closed
             <?php endif; ?>
         </div>
     </main>
-
+    <script>
+        feather.replace();
+    </script>
     <footer>
         <div class="container">
             <p>&copy; 2024 Support Ticket System. All rights reserved.</p>
