@@ -4,48 +4,74 @@ body, html {
     padding: 0;
     font-family: 'Roboto', sans-serif;
 }
+body {
+    background: url('picture3.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    color: #e0e0e0;
+    height: 100vh;
+    margin: 0;
+}
 
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.793);
+    z-index: -1;
+}
 /* Styling the container of the main content */
 .container {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
+    animation: fadeIn 2s ease-in-out;
 }
 
-/* Styling the header */
-header {
-    background-color: #1f1f1f;
-    color: #ffffff;
-    padding: 10px 0;
-    text-align: center;
+/* Header styling */
+.header {
+    background-color: #333;
+    color: white;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-header h1 {
+.header__logo {
+    margin-left: 20px;
+    font-size: 1.5em;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.navbar__menu {
+    list-style: none;
+    display: flex;
     margin: 0;
-    font-size: 1.8em;
-}
-
-/* Navigation menu */
-nav ul {
-    list-style-type: none;
     padding: 0;
 }
 
-nav ul li {
-    display: inline;
-    margin-right: 10px;
+.navbar__item {
+    margin: 0 10px;
 }
 
-nav ul li a {
-    color: #ffffff;
+.navbar__link {
+    color: white;
     text-decoration: none;
-    font-weight: bold;
-    padding: 5px 10px;
-    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
 }
 
-nav ul li a:hover {
-    background-color: #007acc;
+.navbar__link span {
+    margin-left: 5px;
 }
 
 /* Main content section */
@@ -57,27 +83,25 @@ main {
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #1f1f1f;
+    background-color: rgba(31, 31, 31, 0.8); /* 80% opacity */
     color: #e0e0e0;
+    animation: slideIn 1.5s ease-in-out;
 }
 
 table th, table td {
     border: 1px solid #333;
     padding: 8px;
     text-align: left;
-}
-
-table th {
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.8); /* 80% opacity */
+    transition: background-color 0.3s ease-in-out;
 }
 
 table tr:hover {
-    background-color: #444;
+    background-color: rgba(68, 68, 68, 0.8); /* 80% opacity */
 }
 
 /* Footer */
 footer {
-    background-color: #1f1f1f;
     color: #ffffff;
     text-align: center;
     padding: 10px 0;
@@ -96,5 +120,26 @@ footer {
 
     table th, table td {
         padding: 6px;
+    }
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
