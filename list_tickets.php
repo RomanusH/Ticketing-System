@@ -41,7 +41,7 @@ if ($conn->connect_error) {
                     <a href="list_tickets.php" class="navbar__link"><i data-feather="message-square"></i><span>Ticketleri Gör</span></a>        
                 </li>
                 <li class="navbar__item">
-                    <a href="#" class="navbar__link"><i data-feather="users"></i><span>Heasbım</span></a>  
+                    <a href="account.php" class="navbar__link"><i data-feather="users"></i><span>Heasbım</span></a>  
                 </li>
                 <li class="navbar__item">
                     <a href="logout.php" class="navbar__link"><i data-feather="settings"></i><span>Çıkış</span></a>        
