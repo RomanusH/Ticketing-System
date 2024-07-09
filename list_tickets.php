@@ -11,12 +11,31 @@ $username = "?";
 $password = "?";
 $dbname = "?";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
 
+$conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+
+$role = $_SESSION['Role'];
+$customerID = $_SESSION['CustomerID'];
+
+if ($role == 'customerManager') {
+    $sql = "SELECT * FROM Ticket_Details";
+} else {
+    $sql = "SELECT * FROM Ticket_Details WHERE CustomerID = '$customerID'";
+}
+
+
+
+$result = $conn->query($sql);
+
+if (!$result) {
+    die("Query failed: " . $conn->error);
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +60,7 @@ if ($conn->connect_error) {
                     <a href="list_tickets.php" class="navbar__link"><i data-feather="message-square"></i><span>Ticketleri Gör</span></a>        
                 </li>
                 <li class="navbar__item">
-                    <a href="account.php" class="navbar__link"><i data-feather="users"></i><span>Heasbım</span></a>  
+                    <a href="account.php" class="navbar__link"><i data-feather="user"></i><span>Hesabım</span></a>  
                 </li>
                 <li class="navbar__item">
                     <a href="logout.php" class="navbar__link"><i data-feather="settings"></i><span>Çıkış</span></a>        
@@ -65,10 +84,9 @@ if ($conn->connect_error) {
                 </thead>
                 <tbody>
                     <?php
-                    $sql = "SELECT * FROM Ticket_Details";
-                    $result = $conn->query($sql);
-
+                    // Check if query returned results
                     if ($result->num_rows > 0) {
+                        // Fetch and display each row
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
                             echo "<td><a href='ticket_details.php?id=" . $row['ID'] . "'>" . $row['ID'] . "</a></td>";
@@ -87,6 +105,7 @@ if ($conn->connect_error) {
                         echo "<tr><td colspan='6'>No tickets found</td></tr>";
                     }
 
+                    // Close database connection
                     $conn->close();
                     ?>
                 </tbody>
