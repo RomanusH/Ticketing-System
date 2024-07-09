@@ -26,14 +26,16 @@ if ($conn->connect_error) {
 
 $userData = null;
 
+$role = $_SESSION['Role'];
+
 if ($role === 'customer' && $customerID) {
     $sql = "SELECT * FROM Customers WHERE CustomerID = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $customerID); // Changed to 's' for string
+    $stmt->bind_param("s", $customerID);
 } elseif ($role === 'customerManager' && $customerManagerID) {
-    $sql = "SELECT * FROM CustomerManagers WHERE CustomerManagerID = ?";
+    $sql = "SELECT * FROM CustomerManager WHERE CustomerManagerID = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $customerManagerID); // Changed to 's' for string
+    $stmt->bind_param("s", $customerManagerID);
 }
 
 if ($stmt && $stmt->execute()) {
@@ -82,11 +84,11 @@ $conn->close();
         <div class="container">
             <div class="info-container">
                 <h2>Hoş geldin, <?php echo htmlspecialchars($_SESSION['Name']); ?>!</h2>
-                <?php if ($userData): ?>
+                <?php if (isset($userData) && $userData): ?>
                     <table>
                         <tr>
-                            <th>Müşteri Numarası:</th>
-                            <td><?php echo htmlspecialchars($userData['CustomerID']); ?></td>
+                            <th><?php echo ($role === 'customer') ? 'Müşteri Numarası:' : 'Yönetici Numarası:'; ?></th>
+                            <td><?php echo htmlspecialchars($userData['CustomerID'] ?? $userData['CustomerManagerID']); ?></td>
                         </tr>
                         <tr>
                             <th>İsim:</th>
@@ -100,6 +102,12 @@ $conn->close();
                             <th>Email:</th>
                             <td><?php echo htmlspecialchars($userData['Email']); ?></td>
                         </tr>
+                        <?php if ($role === 'customerManager'): ?>
+                            <tr>
+                                <th>Departman:</th>
+                                <td><?php echo htmlspecialchars($userData['Department']); ?></td>
+                            </tr>
+                        <?php endif; ?>
                     </table>
                 <?php else: ?>
                     <p>No account information available.</p>
